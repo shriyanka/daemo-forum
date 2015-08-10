@@ -1,6 +1,5 @@
 # Spirit
 spirit/search/whoosh_index/
-db.sqlite3
 example/media/
 venv
 # Byte-compiled / optimized / DLL files
