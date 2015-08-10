@@ -46,9 +46,9 @@ CACHES.update({
 })
 
 
-ROOT_URLCONF = 'project.urls'
+ROOT_URLCONF = 'forum.urls'
 
-WSGI_APPLICATION = 'project.wsgi.application'
+WSGI_APPLICATION = 'forum.wsgi.application'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/

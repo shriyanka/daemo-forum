@@ -23,7 +23,7 @@ DATABASES = {
     }
 }
 
-ROOT_URLCONF = 'example.project.urls'
+ROOT_URLCONF = 'example.forum.urls'
 
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.MD5PasswordHasher',
