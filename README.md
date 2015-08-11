@@ -1,24 +1,18 @@
-#Running the example application
+Daemo Forum : Forum for open governance operations of Daemo : the crowdsourcing platform (https://daemo.stanford.edu)
 
-Assuming you use virtualenv, follow these steps to download and run the
-Spirit example application in this directory:
-
-
-    $ git clone https://github.com/nitely/Spirit.git
-    $ cd Spirit
+Installation :    
+ ```
+    $ cd daemo-forum
+    $ git checkout daemo_v0.1
     $ virtualenv venv
     $ source ./venv/bin/activate
-    $ pip install .
-    $ cd example
-    $ python manage.py spiritinstall
+    $ pip install -r requirements.txt
     $ python manage.py runserver
+    $ gunicorn forum.wsgi
+```
 
-You should then be able to open your browser on http://127.0.0.1:8000 and
-see the Spirit homepage.
+You should then be able to open your browser on http://127.0.0.1:8000
 
-> This will run using the *developer* settings,
-> which are not suitable for production environments.
+Heroku app : https://quiet-dawn-3697.herokuapp.com
 
-> In production, you should create a `prod_local.py`,
-> import the production settings `from .prod import *`
-> and overwrite settings such as `SECRET_KEY`, `DATABASES` and `ALLOWED_HOSTS`.
+This Project is based on Spirit project (https://github.com/nitely/Spirit)
