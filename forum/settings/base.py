@@ -111,3 +111,7 @@ LOGGING = {
         },
     }
 }
+INSTALLED_APPS += ( "djrill",)
+MANDRILL_API_KEY = "pKrLtufmdFQaWnJ8EOr0kw" # EXAMPLE of your mandrill key
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+DEFAULT_FROM_EMAIL = "vnarwal95@gmail.com" # fill by your email of course
