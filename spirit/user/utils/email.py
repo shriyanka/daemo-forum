@@ -23,7 +23,7 @@ def sender(request, subject, template_name, context, to):
         'protocol': 'https' if request.is_secure() else 'http'
     })
     message = render_to_string(template_name, context)
-    from_email = "{site_name} <{name}@{domain}>".format(name="vnarwal95", domain="gmail.com", site_name=site.name)
+    from_email = "{site_name} <{name}@{domain}>".format(name="your", domain="email.id", site_name=site.name)
 
 
     if len(to) > 1:
