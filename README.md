@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Spirit
 
 [![Build Status](https://img.shields.io/travis/nitely/Spirit.svg?style=flat-square)](https://travis-ci.org/nitely/Spirit)
@@ -66,3 +67,7 @@ The `runtests.py` script enable you to run the test suite of spirit.
 ## License
 
 MIT
+||||||| merged common ancestors
+=======
+# daemo-forum
+>>>>>>> ecafd7a90359c6a6e4d513a7e9f3722b97b6a10c
