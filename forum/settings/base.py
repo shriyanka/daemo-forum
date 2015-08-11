@@ -112,6 +112,7 @@ LOGGING = {
     }
 }
 INSTALLED_APPS += ( "djrill",)
-MANDRILL_API_KEY = "pKrLtufmdFQaWnJ8EOr0kw" # EXAMPLE of your mandrill key
-EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
-DEFAULT_FROM_EMAIL = "vnarwal95@gmail.com" # fill by your email of course
+MANDRILL_API_KEY = "use your api key" # EXAMPLE of your mandrill key
+# EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = "your@email.id" # fill by your email of course
