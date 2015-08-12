@@ -3,7 +3,6 @@ Daemo Forum : Forum for open governance operations of Daemo : the crowdsourcing 
 Installation :
  ```
     $ cd daemo-forum
-    $ git checkout daemo_v0.1
     $ virtualenv venv
     $ source ./venv/bin/activate
     $ pip install -r requirements.txt
