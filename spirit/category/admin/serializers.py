@@ -5,7 +5,7 @@ class SubCategorySerializer(serializers.ModelSerializer):
 		model = Category
 		fields = ("parent", "title", "description", "is_closed", "is_removed")
 class CategorySerializer(serializers.ModelSerializer):
-	category_set = SubCategorySerializer(many = True,read_only=True)
+	category_set = SubCategorySerializer(many = True, read_only = True)
 	class Meta:
 		model = Category
 		fields = ("parent", "title", "description", "is_closed", "is_removed","category_set")
