@@ -2,6 +2,7 @@
 spirit/search/whoosh_index/
 example/media/
 venv
+bower_components
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
