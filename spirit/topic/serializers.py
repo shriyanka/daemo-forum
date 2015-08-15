@@ -1,5 +1,5 @@
 from models import Topic
-from
+from ..category.serializers import CategorySerializer
 from rest_framework import serializers
 
 class TopicSerializer(serializers.ModelSerializer):
