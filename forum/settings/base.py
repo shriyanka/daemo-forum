@@ -22,8 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 # Extend the Spirit installed apps.
 # Check out the spirit.settings.py so you do not end up with duplicated apps.
 INSTALLED_APPS.extend([
-    # 'my_app1',
-    # 'my_app2',
+    'djrill',
+    'rest_framework',
 ])
 
 # same here, check out the spirit.settings.py
@@ -111,7 +111,7 @@ LOGGING = {
         },
     }
 }
-INSTALLED_APPS += ( "djrill",)
+
 MANDRILL_API_KEY = "use your api key" # EXAMPLE of your mandrill key
 # EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
