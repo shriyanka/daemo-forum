@@ -70,7 +70,6 @@ INSTALLED_APPS.extend([
     'oauth2_provider',
     'crowdsourcing',
     'autofixture',
-    'djrill',
 
 ])
 

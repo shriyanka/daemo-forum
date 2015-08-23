@@ -72,6 +72,9 @@ INSTALLED_APPS = [
     'spirit.comment.history',
     'spirit.comment.like',
 
+    #email engine
+    'djrill',
+
     # 'spirit.core.tests'
 ]
 
