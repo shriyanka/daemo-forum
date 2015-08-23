@@ -165,12 +165,7 @@
     .when('/bookmarked-projects', {
       templateUrl: '/static/templates/task-feed/bookmarked.html'
     })
-    .when('/forumst', {
-      templateUrl: '/static/templates/forum/home.html'
-    })
-    .when('/formsta', {
-      templateUrl: '/static/templates/forum/category.html'
-    })
+
     .when('/contributors/rohit', {
       templateUrl: '/static/templates/contributors/rohit.html'
     })
@@ -377,6 +372,17 @@
         templateUrl: '/static/templates/contributors/xiaoran.html'
     })
 
+// for testing static files
+
+    .when('/forumst', {
+      templateUrl: '/static/templates/forum/home.html'
+    })
+    .when('/formsta', {
+      templateUrl: '/static/templates/forum/category.html'
+    })
+
+
+// 
     .otherwise('/');
   }
 })();
