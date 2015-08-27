@@ -11,7 +11,7 @@ class CategorySerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Category
 		fields = ("parent", "title", "description", "is_closed", "is_removed","category_set","topic_set")
-
+		read_only_fields = ("is_closed","is_removed")
 
 	#TODO disable update in these serializers
-	#TODO filtering, ordering and pagination etc according to views.py 
+	#TODO filtering, ordering and pagination etc according to views.py

@@ -375,14 +375,17 @@
 // for testing static files
 
     .when('/forumst', {
+      controller: 'CategoryController',
+      controllerAs: 'category',
       templateUrl: '/static/templates/forum/home.html'
+
     })
     .when('/formsta', {
       templateUrl: '/static/templates/forum/category.html'
     })
 
 
-// 
+//
     .otherwise('/');
   }
 })();
