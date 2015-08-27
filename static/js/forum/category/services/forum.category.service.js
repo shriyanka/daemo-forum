@@ -1,5 +1,5 @@
 /**
-* Worker
+* Category
 * @namespace crowdsource.forum.category.services
 */
 (function () {
