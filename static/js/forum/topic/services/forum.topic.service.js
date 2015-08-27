@@ -40,7 +40,8 @@
 				url: '/forum/topic/REST/',
 				method: 'POST',
 				data: {
-				
+					category : topic.category,
+					title : topic.title
 				}
 			};
 			return HttpService.doRequest(settings);
