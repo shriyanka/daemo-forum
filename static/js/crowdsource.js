@@ -31,7 +31,8 @@ angular
     'crowdsource.template',
     'crowdsource.drive',
     'crowdsource.data-table',
-    'crowdsource.forum.category'
+    'crowdsource.forum.category',
+    'crowdsource.forum.topic'
   ]);
 
 angular

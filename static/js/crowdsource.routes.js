@@ -381,6 +381,8 @@
 
     })
     .when('/formsta', {
+      controller: 'TopicController',
+      controllerAs: 'topic',
       templateUrl: '/static/templates/forum/category.html'
     })
 

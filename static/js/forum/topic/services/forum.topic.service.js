@@ -1,30 +1,30 @@
 /**
-* topic
-* @namespace crowdsource.forum.topic.services
+* Topic
+* @namespace crowdsource.forum.Topic.services
 */
 (function () {
 	'use strict';
 
 	angular
-	.module('crowdsource.forum.topic.services')
-	.factory('topic', topic);
+	.module('crowdsource.forum.Topic.services')
+	.factory('Topic', Topic);
 
-	topic.$inject = ['$cookies', '$http', '$q', '$location', 'HttpService'];
+	Topic.$inject = ['$cookies', '$http', '$q', '$location', 'HttpService'];
 
 	/**
-	* @namespace topic
+	* @namespace Topic
 	* @returns {Factory}
 	*/
 
-	function topic($cookies, $http, $q, $location, HttpService) {
-		var topic = {
-			getCategories: getCategories,
-			addtopic: addtopic
+	function Topic($cookies, $http, $q, $location, HttpService) {
+		var Topic = {
+			getTopics: getTopics,
+			addTopic: addTopic
 		};
 
-		return topic;
+		return Topic;
 
-		function getCategories() {
+		function getTopics() {
 
 			var settings = {
 				url: '/forum/topic/rest/',
@@ -34,7 +34,7 @@
 			return $http(settings);
 		}
 
-		function addtopic(topic) {
+		function addTopic(topic) {
 
 			var settings = {
 				url: '/forum/topic/REST/',
