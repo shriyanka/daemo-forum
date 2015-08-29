@@ -1,0 +1,28 @@
+<md-dialog>
+  <form>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>New Category</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="answer('Not appropriate')">
+        <md-icon>clear</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content >
+    <div>
+hello
+    </div>
+  </md-dialog-content>
+  <div class="md-actions" layout="row">
+
+    <span flex></span>
+    <md-button ng-click="answer('not useful')">
+     Not Useful
+    </md-button>
+    <md-button ng-click="answer('useful')" style="margin-right:20px;">
+      Useful
+    </md-button>
+  </div>
+  </form>
+</md-dialog>
