@@ -19,12 +19,14 @@
 	function Topic($cookies, $http, $q, $location, HttpService) {
 		var Topic = {
 			getTopics: getTopics,
+			getAllTopics: getAllTopics,
+			getTopic: getTopic,
 			addTopic: addTopic
 		};
 
 		return Topic;
 
-		function getTopics() {
+		function getAllTopics() {
 
 			var settings = {
 				url: '/forum/topic/rest/',
@@ -34,7 +36,7 @@
 			return $http(settings);
 		}
 
-		function getCategoryTopics(c_id) {
+		function getTopics(c_id) {
 
 			var settings = {
 				url: '/forum/category/rest/'+c_id+'/topics/',

@@ -380,12 +380,12 @@
       templateUrl: '/static/templates/forum/home.html'
 
     })
-    .when('/formsta', {
+    .when('/forumcategory/:param', {
       controller: 'TopicController',
       controllerAs: 'topic',
       templateUrl: '/static/templates/forum/category.html'
     })
-    .when('/forumcomments', {
+    .when('/forumcomments/:param', {
       controller: 'CommentController',
       controllerAs: 'comment',
       templateUrl: '/static/templates/forum/topic.html'
