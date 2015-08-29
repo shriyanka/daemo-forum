@@ -34,7 +34,7 @@
 			return $http(settings);
 		}
 
-		function getTopics(c_id) {
+		function getCategoryTopics(c_id) {
 
 			var settings = {
 				url: '/forum/category/rest/'+c_id+'/topics/',
