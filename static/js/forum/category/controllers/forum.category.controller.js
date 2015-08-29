@@ -45,6 +45,9 @@
     })
     .then(function(answer) {
       console.log('You said the information was "' + answer.parent + '".');
+      Category.addCategory(answer).then(function (categoryData){
+        console.log(categoryData);
+      });
     }, function() {
       console.log('You cancelled the dialog.');
     });
@@ -56,7 +59,9 @@
 
   function AddCategoryController($location, $scope, Authentication, Category,   $mdDialog){
     var self = this;
-    self.category = {};
+    self.category = {
+      parent : ""
+    };
     self.categories=[];
     Category.getCategories().then(function (categoriesData) {
       self.categories = categoriesData.data;
