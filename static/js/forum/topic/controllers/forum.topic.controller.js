@@ -1,5 +1,5 @@
 /**
-* WorkerProfileController
+* TopicController
 * @namespace crowdsource.forum.topic.controllers
 */
 (function () {
@@ -12,7 +12,7 @@
   TopicController.$inject = ['$location', '$scope', 'Authentication', 'Topic'];
 
   /**
-  * @namespace topicController
+  * @namespace TopicController
   */
   function TopicController($location, $scope, Authentication, Topic) {
     var self = this;

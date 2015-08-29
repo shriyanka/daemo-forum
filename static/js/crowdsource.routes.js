@@ -385,7 +385,11 @@
       controllerAs: 'topic',
       templateUrl: '/static/templates/forum/category.html'
     })
-
+    .when('/forumcomments', {
+      controller: 'CommentController',
+      controllerAs: 'comment',
+      templateUrl: '/static/templates/forum/topic.html'
+    })
 
 //
     .otherwise('/');

@@ -19,15 +19,26 @@
 	function Comment($cookies, $http, $q, $location, HttpService) {
 		var Comment = {
 			getComments: getComments,
+			getAllComments: getAllComments,
 			addComment: addComment
 		};
 
-		return Category;
+		return Comment;
 
 		function getComments(t_id) {
 
 			var settings = {
 				url: '/forum/topic/rest/'+t_id+'/comments/',
+				method: 'GET'
+			};
+			// return HttpService.doRequest(settings);
+			return $http(settings);
+		}
+
+		function getAllComments() {
+
+			var settings = {
+				url: '/forum/comment/rest/',
 				method: 'GET'
 			};
 			// return HttpService.doRequest(settings);

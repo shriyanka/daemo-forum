@@ -1,12 +1,12 @@
 /**
 * Topic
-* @namespace crowdsource.forum.Topic.services
+* @namespace crowdsource.forum.topic.services
 */
 (function () {
 	'use strict';
 
 	angular
-	.module('crowdsource.forum.Topic.services')
+	.module('crowdsource.forum.topic.services')
 	.factory('Topic', Topic);
 
 	Topic.$inject = ['$cookies', '$http', '$q', '$location', 'HttpService'];
