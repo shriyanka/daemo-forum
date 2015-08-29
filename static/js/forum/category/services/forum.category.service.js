@@ -33,7 +33,15 @@
 			// return HttpService.doRequest(settings);
 			return $http(settings);
 		}
+		function getCategory(c_id) {
 
+			var settings = {
+				url: '/forum/category/rest/'+c_id+'/',
+				method: 'GET'
+			};
+			// return HttpService.doRequest(settings);
+			return $http(settings);
+		}
 		function addCategory(category) {
 
 			var settings = {
