@@ -37,13 +37,14 @@
       console.log("clcked on add");
     $mdDialog.show({
       controller: AddCategoryController,
+      controllerAs: 'addcategory',
       templateUrl: '/static/templates/forum/newCategory.html',
       // parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose:true
     })
     .then(function(answer) {
-      console.log('You said the information was "' + answer + '".');
+      console.log('You said the information was "' + answer.parent + '".');
     }, function() {
       console.log('You cancelled the dialog.');
     });
@@ -54,14 +55,21 @@
   }
 
   function AddCategoryController($location, $scope, Authentication, Category,   $mdDialog){
-    $scope.hide = function() {
+    var self = this;
+    self.category = {};
+    self.categories=[];
+    Category.getCategories().then(function (categoriesData) {
+      self.categories = categoriesData.data;
+      console.log(self.categories);
+    });
+    self.hide = function() {
       $mdDialog.hide();
     };
-    $scope.cancel = function() {
+    self.cancel = function() {
       $mdDialog.cancel();
     };
-    $scope.answer = function(answer) {
-      $mdDialog.hide(answer);
+    self.answer = function(category) {
+      $mdDialog.hide(category);
     };
   }
 })();
