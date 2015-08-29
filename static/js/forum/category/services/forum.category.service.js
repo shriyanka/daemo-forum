@@ -45,7 +45,7 @@
 		function addCategory(category) {
 
 			var settings = {
-				url: '/forum/Category/REST/',
+				url: '/forum/category/rest/',
 				method: 'POST',
 				data: {
 					parent : category.parent,

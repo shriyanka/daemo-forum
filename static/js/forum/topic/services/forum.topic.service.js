@@ -57,7 +57,7 @@
 		function addTopic(topic) {
 
 			var settings = {
-				url: '/forum/topic/REST/',
+				url: '/forum/topic/rest/',
 				method: 'POST',
 				data: {
 					category : topic.category,
