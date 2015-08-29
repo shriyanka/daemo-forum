@@ -34,6 +34,26 @@
 			return $http(settings);
 		}
 
+		function getTopics(c_id) {
+
+			var settings = {
+				url: '/forum/category/rest/'+c_id+'/topics/',
+				method: 'GET'
+			};
+			// return HttpService.doRequest(settings);
+			return $http(settings);
+		}
+
+		function getTopic(t_id) {
+
+			var settings = {
+				url: '/forum/topic/rest/'+t_id+'/',
+				method: 'GET'
+			};
+			// return HttpService.doRequest(settings);
+			return $http(settings);
+		}
+
 		function addTopic(topic) {
 
 			var settings = {
