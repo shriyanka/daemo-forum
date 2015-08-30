@@ -1,4 +1,4 @@
-<md-dialog flex="50">
+<md-dialog flex="30">
   <form>
   <md-toolbar>
     <div class="md-toolbar-tools">
@@ -15,10 +15,10 @@
 				<option value="" selected>---</option>
 				<option ng-repeat = "cat in addcategory.categories" value={{cat.id}}>{{cat.title}}</option>
 			</select> -->
-			<md-input-container flex="">
+			<md-input-container>
 				<md-select-label>Parent Category</md-select-label>
         <md-select ng-model="addcategory.category.parent">
-					<md-option value="">----</md-option>
+					<md-option value="">- - - - - - -</md-option>
           <md-option ng-repeat="cat in addcategory.categories" value="{{cat.id}}">{{cat.title}}</md-option>
         </md-select>
       </md-input-container>

@@ -6,52 +6,62 @@
   'use strict';
 
   angular
-    .module('crowdsource.forum.category.controllers')
-    .controller('CategoryController', CategoryController);
+  .module('crowdsource.forum.category.controllers')
+  .controller('CategoryController', CategoryController);
 
 
   angular
-    .module('crowdsource.forum.category.controllers')
-    .controller('AddCategoryController', AddCategoryController);
+  .module('crowdsource.forum.category.controllers')
+  .controller('AddCategoryController', AddCategoryController);
 
-  CategoryController.$inject = ['$location', '$scope', 'Authentication', 'Category', '$mdDialog'];
+  CategoryController.$inject = ['$location', '$scope', 'Authentication', 'Category', '$mdDialog', '$mdToast'];
   AddCategoryController.$inject = ['$location', '$scope', 'Authentication', 'Category', '$mdDialog'];
 
   /**
   * @namespace CategoryController
   */
-  function CategoryController($location, $scope, Authentication, Category, $mdDialog) {
+  function CategoryController($location, $scope, Authentication, Category, $mdDialog, $mdToast) {
     var self = this;
-		var userAccount = Authentication.getAuthenticatedAccount();
-		if (!userAccount) {
-			$location.path('/login');
-			return;
-		}
-		self.categories=[];
-    Category.getCategories().then(function (categoriesData) {
-      self.categories = categoriesData.data;
-      console.log(self.categories);
-    });
+    var userAccount = Authentication.getAuthenticatedAccount();
+    if (!userAccount) {
+      $location.path('/login');
+      return;
+    }
+    self.categories=[];
+
+    self.getCategories = function(){
+      Category.getCategories().then(function (categoriesData) {
+        self.categories = categoriesData.data;
+        console.log(self.categories);
+      });
+    };
+    self.getCategories();
 
     self.add = function(ev) {
       console.log("clcked on add");
-    $mdDialog.show({
-      controller: AddCategoryController,
-      controllerAs: 'addcategory',
-      templateUrl: '/static/templates/forum/newCategory.html',
-      // parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose:true
-    })
-    .then(function(answer) {
-      console.log('You said the information was "' + answer.parent + '".');
-      Category.addCategory(answer).then(function (categoryData){
-        console.log(categoryData);
+      $mdDialog.show({
+        controller: AddCategoryController,
+        controllerAs: 'addcategory',
+        templateUrl: '/static/templates/forum/newCategory.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true
+      })
+      .then(function(answer) {
+        Category.addCategory(answer).then(function (categoryData){
+          if(categoryData[1]=201){
+            self.getCategories();
+            $mdToast.show(
+                $mdToast.simple()
+                .content('New Category added : '+categoryData[0].title)
+                .hideDelay(3000)
+            );
+          }
+        });
+      }, function() {
+        console.log('You cancelled the dialog.');
       });
-    }, function() {
-      console.log('You cancelled the dialog.');
-    });
-  };
+    };
 
 
 
@@ -63,13 +73,13 @@
       parent : ""
     };
     self.categories=[];
-    Category.getCategories().then(function (categoriesData) {
-      self.categories = categoriesData.data;
-      console.log(self.categories);
-    });
-    self.hide = function() {
-      $mdDialog.hide();
+    self.getCategories = function(){
+      Category.getCategories().then(function (categoriesData) {
+        self.categories = categoriesData.data;
+        console.log(self.categories);
+      });
     };
+    self.getCategories();
     self.cancel = function() {
       $mdDialog.cancel();
     };
