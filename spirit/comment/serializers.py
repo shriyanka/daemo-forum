@@ -5,4 +5,4 @@ class CommentSerializer(serializers.ModelSerializer):
 		model = Comment
 		fields = ("user", "topic","comment","comment_html", "action", "date","is_removed","is_modified","ip_address",
 		"modified_count","likes_count")
-		read_only_fields = ("user","topic","comment_html","action","date","is_removed","is_modified","modified_count","likes_count")
+		read_only_fields = ("user","comment_html","action","date","is_removed","is_modified","modified_count","likes_count")

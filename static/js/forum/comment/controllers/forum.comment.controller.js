@@ -9,29 +9,46 @@
     .module('crowdsource.forum.comment.controllers')
     .controller('CommentController', CommentController);
 
-  CommentController.$inject = ['$location', '$scope', 'Authentication', 'Comment','$routeParams'];
+  CommentController.$inject = ['$location', '$scope', 'Authentication', 'Comment', 'Topic', '$routeParams', '$mdToast'];
 
   /**
-  * @namespace commentController
+  * @namespace CommentController
   */
-  function CommentController($location, $scope, Authentication, Comment, $routeParams) {
+	function CommentController($location, $scope, Authentication, Comment, Topic, $routeParams, $mdToast) {
     var self = this;
-		self.topic_id = $routeParams.param;
+		self.topic={};
+		Topic.getTopic($routeParams.param).then(function(topicData){
+			self.topic=topicData[0];
+			console.log(self.topic);
+		});
+
 		var userAccount = Authentication.getAuthenticatedAccount();
 		if (!userAccount) {
 			$location.path('/login');
 			return;
 		}
-		self.comments=[];
-    Comment.getAllComments().then(function (commentsData) {
-      self.comments = commentsData.data;
-      console.log(self.comments);
-    });
 
-		// Comment.getComments(self.topic_id).then(function (commentsData) {
-		// 	self.comments = commentsData.data;
-		// 	console.log(self.comments);
-		// });
+		Comment.getComments(self.topic_id).then(function (commentsData) {
+			self.comments = commentsData.data;
+			console.log(self.comments);
+		});
+
+		self.newcomment = {
+			topic: self.topic.id
+		};
+		self.addComment = function(){
+			Comment.addComment(self.newcomment).then(function(commentData){
+				$mdToast.show(
+						$mdToast.simple()
+						.content('New comment added')
+						.hideDelay(3000)
+				);
+				self.comments.push(commentData.data);
+				self.newcomment = {
+					topic: self.topic.id
+				};
+			});
+		}
 
 
   }
