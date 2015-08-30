@@ -13,65 +13,28 @@
 		<md-card-content>
 
 			<md-list>
-				<md-list-item class="md-2-line md-offset" >
-					<md-icon class="material-icons md-48" layout-align="center center">list</md-icon>
-					<div class="md-list-item-text">
-						<div layout="row">
-							<div layout="column" flex="80" layout-align="center start">
-								<h3>Sub Category 1</h3>
-								<p>Description of sb1 bla bla bla bla bla bla bla bla bla bla bla bla</p>
-							</div>
-							<div layout = "row" flex="20" layout-align = "center end">
-									<div  flex="50">
-										<md-icon md-font-set="material-icons">comment</md-icon> 67
-									</div>
-									<div  flex="50">
-										<md-icon md-font-set="material-icons">visibility</md-icon> 10
-									</div>
+				<div ng-repeat = "subcategory in topic.category.category_set">
+					<md-list-item class="md-2-line md-offset" >
+						<md-icon class="material-icons md-48" layout-align="center center">list</md-icon>
+						<div class="md-list-item-text">
+							<div layout="row">
+								<div layout="column" flex="80" layout-align="center start">
+									<h3>{{subcategory.title}}</h3>
+									<p>{{subcategory.description}}</p>
+								</div>
+								<!-- <div layout = "row" flex="20" layout-align = "center end">
+										<div  flex="50">
+											<md-icon md-font-set="material-icons">comment</md-icon> 67
+										</div>
+										<div  flex="50">
+											<md-icon md-font-set="material-icons">visibility</md-icon> 10
+										</div>
+								</div> -->
 							</div>
 						</div>
-					</div>
-				</md-list-item>
+					</md-list-item>
 				<md-divider></md-divider>
-				<md-list-item class="md-2-line md-offset" >
-					<md-icon class="material-icons md-48" layout-align="center center">list</md-icon>
-					<div class="md-list-item-text">
-						<div layout="row">
-							<div layout="column" flex="80" layout-align="center start">
-								<h3>Sub Category 2</h3>
-								<p>Description of sb2 bla bla bla............... . . . . . </p>
-							</div>
-							<div layout = "row" flex="20" layout-align = "center end">
-									<div  flex="50">
-										<md-icon md-font-set="material-icons">comment</md-icon> 67
-									</div>
-									<div  flex="50">
-										<md-icon md-font-set="material-icons">visibility</md-icon> 10
-									</div>
-							</div>
-						</div>
-					</div>
-				</md-list-item>
-				<md-divider></md-divider>
-				<md-list-item class="md-2-line md-offset" >
-					<md-icon class="material-icons md-48" layout-align="center center">list</md-icon>
-					<div class="md-list-item-text">
-						<div layout="row">
-							<div layout="column" flex="80" layout-align="center start">
-								<h3>Sub Category 3</h3>
-								<p>Description of sb3 bla bla bla</p>
-							</div>
-							<div layout = "row" flex="20" layout-align = "center end">
-									<div  flex="50">
-										<md-icon md-font-set="material-icons">comment</md-icon> 67
-									</div>
-									<div  flex="50">
-										<md-icon md-font-set="material-icons">visibility</md-icon> 10
-									</div>
-							</div>
-						</div>
-					</div>
-				</md-list-item>
+			</div>
 			</md-list>
 		</md-card-content>
 	</md-card>
@@ -82,7 +45,7 @@
 			<div class="md-toolbar-tools">
 				<h3><span>Topics</span></h3>
 				<span flex></span>
-				<md-button class="md-icon-button" aria-label="Favorite">
+				<md-button class="md-icon-button" aria-label="Favorite" ng-click = "topic.addTopic()">
 					<md-icon class="material-icons">add_to_photos</md-icon>
 				</md-button>
 			</div>
@@ -197,12 +160,13 @@
 		<md-card-content>
 		<form layout="column" name="TopicForm">
 		<textarea ng-model="topic.title"></textarea>
-		<textarea ng-model="topic.category"></textarea>
+
 		<input type="email" />
 		<input type="submit" value="Submit"/>
 		</form>
 		</md-card-content>
 	</md-card>
+
 
 
 

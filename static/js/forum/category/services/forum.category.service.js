@@ -19,6 +19,7 @@
 	function Category($cookies, $http, $q, $location, HttpService) {
 		var Category = {
 			getCategories: getCategories,
+			getCategory: getCategory,
 			addCategory: addCategory
 		};
 
