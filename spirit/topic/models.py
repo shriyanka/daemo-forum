@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.utils import timezone
 from django.db.models import F
+from django.contrib.auth.models import User
 
 from .managers import TopicQuerySet
 from ..core.utils.models import AutoSlugField
@@ -15,7 +16,7 @@ from ..core.utils.models import AutoSlugField
 
 class Topic(models.Model):
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("user"))
+    user = models.ForeignKey(User, verbose_name=_("user"))
     category = models.ForeignKey('spirit_category.Category', verbose_name=_("category"))
 
     title = models.CharField(_("title"), max_length=255)
