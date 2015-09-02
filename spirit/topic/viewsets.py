@@ -2,10 +2,10 @@ from rest_framework import viewsets
 from models import Topic
 from ..comment.serializers import CommentSerializer
 from serializers import TopicSerializer
-from rest_framework.decorators import detail_route,list_route
+from rest_framework.decorators import detail_route,list_route,permission_classes
 from rest_framework.response import Response
 from rest_framework import status
-
+from rest_framework.permissions import IsAuthenticated
 
 class TopicViewSet(viewsets.ModelViewSet):
 	#TODO get queryset according to view in views.py
@@ -17,6 +17,7 @@ class TopicViewSet(viewsets.ModelViewSet):
 		serializer = CommentSerializer(comments, many=True)
 		return Response(serializer.data)
 
+	@permission_classes((IsAuthenticated, ))
 	def create(self,request,*args,**kwargs):
 		topic_serializer = serializer_class(data = request.data)
 		if topic_serializer.is_valid():

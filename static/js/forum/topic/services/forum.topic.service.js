@@ -52,14 +52,15 @@
 				url: '/forum/topic/rest/'+t_id+'/',
 				method: 'GET'
 			};
-			// return HttpService.doRequest(settings);
-			return $http(settings);
+			return HttpService.doRequest(settings);
+			// return $http(settings);
 		}
 
 		function addTopic(topic) {
 
 			var settings = {
 				url: '/forum/topic/rest/',
+
 				method: 'POST',
 				data: {
 					category : topic.category,
