@@ -29,24 +29,23 @@
 		self.category = {};
 		Category.getCategory($routeParams.param).then(function (CategoryData){
 			self.category = CategoryData.data;
-			console.log(self.category);
+			// console.log(self.category);
 		});
 		var userAccount = Authentication.getAuthenticatedAccount();
-		console.log(userAccount);
 		if (!userAccount) {
 			$location.path('/login');
 			return;
 		}
 		self.topics=[];
-    // Topic.getTopics(self.category.id).then(function (topicsData) {
-    //   self.topics = topicsData.data;
-    //   console.log(self.topics);
-    // });
-
-		Topic.getAllTopics().then(function (topicsData) {
+    Topic.getTopics($routeParams.param).then(function (topicsData) {
       self.topics = topicsData.data;
       console.log(self.topics);
     });
+
+		// Topic.getAllTopics().then(function (topicsData) {
+    //   self.topics = topicsData.data;
+    //   console.log(self.topics);
+    // });
 
 		self.addTopic = function(ev) {
 			console.log("clcked on add");

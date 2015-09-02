@@ -57,27 +57,28 @@
 		<md-card-content>
 
 			<md-list>
+				<div ng-repeat = "topic in topic.topics">
 				<md-list-item class="md-2-line md-offset" >
 					<md-icon class="material-icons md-48" layout-align="center center">list</md-icon>
 					<div class="md-list-item-text">
 						<div layout="row">
 							<div layout="column" flex="80" layout-align="center start">
-								<h3>Topic 1</h3>
-								<p>Description of sb1 bla bla bla bla bla bla bla bla bla bla bla bla</p>
+								<h3>{{topic.title}}</h3>
+								<p>{{topic.description}}</p>
 							</div>
 							<div layout = "row" flex="20" layout-align = "center end">
 									<div  flex="50">
-										<md-icon md-font-set="material-icons">comment</md-icon> 67
-									</div>
+										<md-icon md-font-set="material-icons">comment</md-icon> {{topic.comment_count}}	</div>
 									<div  flex="50">
-										<md-icon md-font-set="material-icons">visibility</md-icon> 10
+										<md-icon md-font-set="material-icons">visibility</md-icon> {{topic.view_count}}
 									</div>
 							</div>
 						</div>
 					</div>
 				</md-list-item>
 				<md-divider></md-divider>
-				<md-list-item class="md-2-line md-offset" >
+			</div>
+				<!-- <md-list-item class="md-2-line md-offset" >
 					<md-icon class="material-icons md-48" layout-align="center center">list</md-icon>
 					<div class="md-list-item-text">
 						<div layout="row">
@@ -155,7 +156,7 @@
 							</div>
 						</div>
 					</div>
-				</md-list-item>
+				</md-list-item> -->
 			</md-list>
 		</md-card-content>
 	</md-card>

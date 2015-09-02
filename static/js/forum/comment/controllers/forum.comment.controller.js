@@ -15,20 +15,20 @@
   * @namespace CommentController
   */
 	function CommentController($location, $scope, Authentication, Comment, Topic, $routeParams, $mdToast) {
-    var self = this;
-		self.topic={};
-		Topic.getTopic($routeParams.param).then(function(topicData){
-			self.topic=topicData[0];
-			console.log(self.topic);
-		});
-
 		var userAccount = Authentication.getAuthenticatedAccount();
 		if (!userAccount) {
 			$location.path('/login');
 			return;
 		}
+		
+    var self = this;
+		self.topic={};
+		Topic.getTopic($routeParams.param).then(function(topicData){
+			self.topic=topicData.data;
+			console.log(self.topic);
+		});
 
-		Comment.getComments(self.topic_id).then(function (commentsData) {
+		Comment.getComments($routeParams.param).then(function (commentsData) {
 			self.comments = commentsData.data;
 			console.log(self.comments);
 		});
