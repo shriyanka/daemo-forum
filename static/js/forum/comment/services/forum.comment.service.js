@@ -31,8 +31,7 @@
 				url: '/forum/topic/rest/'+t_id+'/comments/',
 				method: 'GET'
 			};
-			// return HttpService.doRequest(settings);
-			return $http(settings);
+			return HttpService.doRequest(settings);
 		}
 
 		function getAllComments() {
@@ -41,8 +40,7 @@
 				url: '/forum/comment/rest/',
 				method: 'GET'
 			};
-			// return HttpService.doRequest(settings);
-			return $http(settings);
+			return HttpService.doRequest(settings);
 		}
 
 		function addComment(comment) {

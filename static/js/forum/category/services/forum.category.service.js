@@ -31,8 +31,7 @@
 				url: '/forum/category/rest/',
 				method: 'GET'
 			};
-			// return HttpService.doRequest(settings);
-			return $http(settings);
+			return HttpService.doRequest(settings);
 		}
 		function getCategory(c_id) {
 
@@ -40,8 +39,7 @@
 				url: '/forum/category/rest/'+c_id+'/',
 				method: 'GET'
 			};
-			// return HttpService.doRequest(settings);
-			return $http(settings);
+			return HttpService.doRequest(settings);
 		}
 		function addCategory(category) {
 
