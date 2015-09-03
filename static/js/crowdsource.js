@@ -10,16 +10,19 @@ angular
     //'angular-oauth2',
     'ngDragDrop',
     'ui.sortable',
+    'ngFileUpload',
     // local modules
     'crowdsource.config',
+    'crowdsource.interceptor',
     'crowdsource.routes',
     'crowdsource.authentication',
+    'crowdsource.dashboard',
     'crowdsource.layout',
     'crowdsource.home',
     'crowdsource.requester',
     'crowdsource.ranking',
     'crowdsource.tasksearch',
-    'crowdsource.tasks',
+    'crowdsource.task',
     'crowdsource.monitor',
     'crowdsource.directives',
     'crowdsource.services',
@@ -31,6 +34,8 @@ angular
     'crowdsource.template',
     'crowdsource.drive',
     'crowdsource.data-table',
+    'crowdsource.user',
+    'crowdsource.helpers'
     'crowdsource.forum.category',
     'crowdsource.forum.topic',
     'crowdsource.forum.comment'
@@ -40,15 +45,29 @@ angular
   .module('crowdsource')
   .run(run);
 
-run.$inject = ['$http', '$rootScope', '$window'];
+run.$inject = ['$http', '$rootScope', '$window', '$location', 'Authentication'];
 
 /**
 * @name run
 * @desc Update xsrf $http headers to align with Django's defaults
 */
-function run($http, $rootScope, $window) {
+function run($http, $rootScope, $window, $location, Authentication) {
   $http.defaults.xsrfHeaderName = 'X-CSRFToken';
   $http.defaults.xsrfCookieName = 'csrftoken';
+
+  $rootScope.$on('$routeChangeStart', function (event, next) {
+      var isAuthenticated = Authentication.isAuthenticated();
+
+      if (!isAuthenticated && next.hasOwnProperty('$$route') && next.$$route.hasOwnProperty('authenticated') && next.$$route.authenticated) {
+          event.preventDefault();
+
+          $rootScope.isLoggedIn = isAuthenticated;
+          $rootScope.account = null;
+
+          $location.path('/login');
+      }
+    });
+
   /*$rootScope.$on('oauth:error', function(event, rejection) {
     if ('invalid_grant' === rejection.data.error) {
       return;

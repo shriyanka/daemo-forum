@@ -15,7 +15,7 @@ import os, django
 import dj_database_url
 from distutils.version import StrictVersion
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-from spirit.settings import *
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -37,7 +37,8 @@ REST_FRAMEWORK = {
     'DEFAULT_MODEL_SERIALIZER_CLASS':
         'rest_framework.serializers.HyperlinkedModelSerializer',
     'DEFAULT_AUTHENTICATION_CLASSES': (
-         'oauth2_provider.ext.rest_framework.OAuth2Authentication',),
+        'rest_framework.authentication.SessionAuthentication',
+        'oauth2_provider.ext.rest_framework.OAuth2Authentication',),
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
@@ -62,23 +63,25 @@ MIGRATION_MODULES = {
     'oauth2_provider': 'crowdsourcing.migrations.oauth2_provider',
 }
 
-INSTALLED_APPS.extend([
+INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.staticfiles',
+    'django.contrib.sessions',
     'compressor',
     'rest_framework',
     'oauth2_provider',
     'crowdsourcing',
     'autofixture',
 
-])
+)
 
-MIDDLEWARE_CLASSES += (
+MIDDLEWARE_CLASSES = (
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'djconfig.middleware.DjConfigMiddleware',
 )
 
 ROOT_URLCONF = 'csp.urls'
@@ -159,14 +162,16 @@ TEMPLATE_DIRS = (
 
 # Email
 EMAIL_HOST = 'localhost'
-#EMAIL_PORT = 587
-#EMAIL_USE_TLS = True
-EMAIL_ENABLED = False
-EMAIL_SENDER = 'crowdsourcing.platform.demo@gmail.com'
-EMAIL_SENDER_PASSWORD = 'crowdsourcing.demo.2015'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_ENABLED = True
+EMAIL_SENDER = 'daemo@cs.stanford.edu'
+EMAIL_SENDER_DEV = 'crowdsourcing.platform.demo@gmail.com'
+EMAIL_SENDER_PASSWORD_DEV = 'crowdsourcing.demo.2015'
+SENDGRID_API_KEY = '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'
 
 # Others
-REGISTRATION_ALLOWED = True
+REGISTRATION_ALLOWED = False
 PASSWORD_RESET_ALLOWED = True
 
 LOGIN_URL = '/login'
@@ -181,11 +186,7 @@ try:
 except Exception as e:
     pass
 
-CACHES.update({
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-    },
-})
+
 GRAPH_MODELS = {
   'all_applications': True,
   'group_models': True,
@@ -198,9 +199,6 @@ if StrictVersion(django.get_version())<'1.8':
 
 USERNAME_MAX_LENGTH = 30
 
-# mandrill
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = "your@email.id"
 
 # Google Drive
 GOOGLE_DRIVE_CLIENT_ID = '960606345011-3bn8sje38i9c0uo8p87ln6tfb2dhco9v.apps.googleusercontent.com'

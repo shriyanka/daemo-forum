@@ -2,6 +2,9 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 from oauth2client.django_orm import FlowField, CredentialsField
+from crowdsourcing.utils import get_delimiter
+import pandas as pd
+import os
 
 
 class RegistrationModel(models.Model):
@@ -32,12 +35,18 @@ class Country(models.Model):
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     last_updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
+    def __unicode__(self):
+        return u'%s' % (self.name)
+
 
 class City(models.Model):
     name = models.CharField(max_length=64, error_messages={'required': 'Please specify the city!', })
     country = models.ForeignKey(Country)
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     last_updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __unicode__(self):
+        return u'%s' % (self.name)
 
 
 class Address(models.Model):
@@ -46,6 +55,9 @@ class Address(models.Model):
     city = models.ForeignKey(City)
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     last_updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __unicode__(self):
+        return u'%s, %s, %s' % (self.street, self.city, self.country)
 
 
 class Role(models.Model):
@@ -83,8 +95,6 @@ class UserProfile(models.Model):
     languages = models.ManyToManyField(Language, through='UserLanguage')
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     last_updated = models.DateTimeField(auto_now_add=False, auto_now=True)
-    worker_alias = models.CharField(max_length=32, error_messages={'required': "Please enter an alias!"})
-    requester_alias = models.CharField(max_length=32, error_messages={'required': "Please enter an alias!"})
 
 
 class UserCountry(models.Model):
@@ -108,7 +118,7 @@ class Worker(models.Model):
     profile = models.OneToOneField(UserProfile)
     skills = models.ManyToManyField(Skill, through='WorkerSkill')
     deleted = models.BooleanField(default=False)
-
+    alias = models.CharField(max_length=32, error_messages={'required': "Please enter an alias!"})
 
 class WorkerSkill(models.Model):
     worker = models.ForeignKey(Worker)
@@ -117,13 +127,14 @@ class WorkerSkill(models.Model):
     verified = models.BooleanField(default=False)
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     last_updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
     class Meta:
         unique_together = ('worker', 'skill')
 
 
 class Requester(models.Model):
     profile = models.OneToOneField(UserProfile)
-
+    alias = models.CharField(max_length=32, error_messages={'required': "Please enter an alias!"})
 
 class UserRole(models.Model):
     user_profile = models.ForeignKey(UserProfile)
@@ -171,6 +182,7 @@ class ProjectRequester(models.Model):
     project = models.ForeignKey(Project)
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     last_updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
     class Meta:
         unique_together = ('requester', 'project')
 
@@ -205,6 +217,11 @@ class Module(models.Model):
                 (3, 'In Progress'),
                 (4, 'Completed')
                 )
+    permission_types = ((1, "Others:Read+Write::Workers:Read+Write"),
+                (2, 'Others:Read::Workers:Read+Write'),
+                (3, 'Others:Read::Workers:Read'),
+                (4, 'Others:None::Workers:Read')
+                )
     status = models.IntegerField(choices=statuses, default=1)
     price = models.FloatField()
     repetition = models.IntegerField(default=1)
@@ -216,6 +233,11 @@ class Module(models.Model):
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     last_updated = models.DateTimeField(auto_now_add=False, auto_now=True)
     template = models.ManyToManyField(Template, through='ModuleTemplate')
+    is_micro = models.BooleanField(default=True)
+    is_prototype = models.BooleanField(default=False)
+    min_rating = models.FloatField(default=0)
+    allow_feedback  = models.BooleanField(default=True)
+    feedback_permissions = models.IntegerField(choices=permission_types, default=1)
 
 
 class ModuleCategory(models.Model):
@@ -249,9 +271,13 @@ class TemplateItem(models.Model):
     type = models.CharField(max_length=16)
     sub_type = models.CharField(max_length=16)
     values = models.TextField(null=True)
+    position = models.IntegerField()
     deleted = models.BooleanField(default=False)
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     last_updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    class Meta:
+        ordering = ['position']
 
 
 class ModuleTemplate(models.Model):
@@ -288,13 +314,21 @@ class Task(models.Model):
 class TaskWorker(models.Model):
     task = models.ForeignKey(Task, related_name='task_workers')
     worker = models.ForeignKey(Worker)
+    statuses = ((1, 'In Progress'),
+                (2, 'Submitted'),
+                (3, 'Accepted'),
+                (4, 'Rejected'),
+                (5, 'Returned'),
+                (6, 'Skipped')
+                )
+    task_status = models.IntegerField(choices=statuses, default=1)
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     last_updated = models.DateTimeField(auto_now_add=False, auto_now=True)
-
+    is_paid = models.BooleanField(default=False)
 
 class TaskWorkerResult(models.Model):
     task_worker = models.ForeignKey(TaskWorker, related_name='task_worker_results')
-    result = models.TextField()
+    result = models.TextField(null=True)
     template_item = models.ForeignKey(TemplateItem)
     # TODO: To be refined
     statuses = ((1, 'Created'),
@@ -450,12 +484,64 @@ class Message(models.Model):
     created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     last_updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
+
 class ConversationRecipient(models.Model):
     recipient = models.ForeignKey(User, related_name='recipients')
     conversation = models.ForeignKey(Conversation, related_name='conversation_recipient')
     date_added = models.DateTimeField(auto_now_add=True, auto_now=False)
 
+
 class UserMessage(models.Model):
     message = models.ForeignKey(Message)
     user = models.ForeignKey(User)
+    deleted = models.BooleanField(default=False)
+
+
+class RequesterInputFile(models.Model):
+    # TODO will need save files on a server rather than in a temporary folder
+    file = models.FileField(upload_to='tmp/')
+    deleted = models.BooleanField(default=False)
+
+    def parse_csv(self):
+        delimiter = get_delimiter(self.file.name)
+        df = pd.DataFrame(pd.read_csv(self.file, sep=delimiter))
+        return df.to_dict(orient='records')
+
+    def delete(self, *args, **kwargs):
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        path = os.path.join(root, self.file.url[1:])
+        os.remove(path)
+        super(RequesterInputFile, self).delete(*args, **kwargs)
+
+
+class WorkerRequesterRating(models.Model):
+    origin = models.ForeignKey(UserProfile, related_name='rating_origin')
+    target = models.ForeignKey(UserProfile, related_name='rating_target')
+    module = models.ForeignKey(Module, related_name='rating_module')
+    weight = models.FloatField(default=2)
+    origin_type = models.CharField(max_length=16)
+    created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    last_updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+class Comment(models.Model):
+    sender = models.ForeignKey(UserProfile, related_name='comment_sender')
+    body = models.TextField(max_length=8192)
+    parent = models.ForeignKey('self', related_name='reply_to', null=True)
+    deleted = models.BooleanField(default=False)
+    created_timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    last_updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    class Meta:
+        ordering = ['created_timestamp']
+
+
+class ModuleComment(models.Model):
+    module = models.ForeignKey(Module, related_name='modulecomment_module')
+    comment = models.ForeignKey(Comment, related_name='modulecomment_comment')
+    deleted = models.BooleanField(default=False)
+
+
+class TaskComment(models.Model):
+    task = models.ForeignKey(Task, related_name='taskcomment_task')
+    comment = models.ForeignKey(Comment, related_name='taskcomment_comment')
     deleted = models.BooleanField(default=False)
