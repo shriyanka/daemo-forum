@@ -6,7 +6,7 @@ from rest_framework.decorators import detail_route,list_route,permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
-
+import pdb
 class TopicViewSet(viewsets.ModelViewSet):
 	#TODO get queryset according to view in views.py
 	queryset = Topic.objects.all()
@@ -19,10 +19,10 @@ class TopicViewSet(viewsets.ModelViewSet):
 
 	@permission_classes((IsAuthenticated, ))
 	def create(self,request,*args,**kwargs):
-		topic_serializer = serializer_class(data = request.data)
-		if topic_serializer.is_valid():
-			instance = topic_serializer.create(user = request.user)
-			return Response(instance,status=status.HTTP_201_CREATED, headers = self.get_success_headers(topic_serializer.data))
+		topic_serializer = TopicSerializer(data = request.data)
+		if topic_serializer.is_valid(raise_exception=True):
+			serializer = TopicSerializer(instance = topic_serializer.create(user = request.user))
+			return Response(serializer.data,status=status.HTTP_201_CREATED,headers=self.get_success_headers(serializer.data))
 		else:
 			return Response(topic_serializer.errors,
 			                            status=status.HTTP_400_BAD_REQUEST)
