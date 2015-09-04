@@ -189,6 +189,24 @@
       templateUrl: '/static/templates/task-feed/bookmarked.html',
       authenticated:true
     })
+    .when('/forum-home', {
+        controller: 'CategoryController',
+        controllerAs: 'category',
+        templateUrl :'/static/templates/forum/home.html',
+        authenticated:true
+    })
+    .when('/forum-category/:param', {
+        controller: 'TopicController',
+        controllerAs: 'topic',
+        templateUrl :'/static/templates/forum/category.html',
+        authenticated:true
+    })
+    .when('/forum-topic/:param', {
+        controller: 'CommentController',
+        controllerAs: 'comment',
+        templateUrl :'/static/templates/forum/topic.html',
+        authenticated:true
+    })
     .when('/contributors/rohit', {
       templateUrl: '/static/templates/contributors/rohit.html'
     })
@@ -394,26 +412,6 @@
     .when('/contributors/xiaoran', {
         templateUrl: '/static/templates/contributors/xiaoran.html'
     })
-    // for testing static files
-
-        .when('/forumst', {
-          controller: 'CategoryController',
-          controllerAs: 'category',
-          templateUrl: '/static/templates/forum/home.html'
-
-        })
-        .when('/forumcategory/:param', {
-          controller: 'TopicController',
-          controllerAs: 'topic',
-          templateUrl: '/static/templates/forum/category.html'
-        })
-        .when('/forumcomments/:param', {
-          controller: 'CommentController',
-          controllerAs: 'comment',
-          templateUrl: '/static/templates/forum/topic.html'
-        })
-
-    //
 
     .otherwise('/');
   }

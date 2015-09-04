@@ -28,7 +28,7 @@
     var self = this;
 		self.category = {};
 		Category.getCategory($routeParams.param).then(function (CategoryData){
-			self.category = CategoryData.data;
+			self.category = CategoryData[0];
 			// console.log(self.category);
 		});
 		var userAccount = Authentication.getAuthenticatedAccount();
@@ -38,12 +38,12 @@
 		}
 		self.topics=[];
     Topic.getTopics($routeParams.param).then(function (topicsData) {
-      self.topics = topicsData.data;
+      self.topics = topicsData[0];
       console.log(self.topics);
     });
 
 		// Topic.getAllTopics().then(function (topicsData) {
-    //   self.topics = topicsData.data;
+    //   self.topics = topicsData[0];
     //   console.log(self.topics);
     // });
 

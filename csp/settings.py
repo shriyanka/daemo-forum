@@ -15,7 +15,7 @@ import os, django
 import dj_database_url
 from distutils.version import StrictVersion
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+from spirit.settings import *
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -63,7 +63,7 @@ MIGRATION_MODULES = {
     'oauth2_provider': 'crowdsourcing.migrations.oauth2_provider',
 }
 
-INSTALLED_APPS = (
+INSTALLED_APPS += (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.staticfiles',
@@ -73,10 +73,11 @@ INSTALLED_APPS = (
     'oauth2_provider',
     'crowdsourcing',
     'autofixture',
+    'spirit',
 
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES += (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.common.CommonMiddleware',

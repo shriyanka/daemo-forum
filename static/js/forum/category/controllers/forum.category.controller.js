@@ -31,8 +31,8 @@
 
     self.getCategories = function(){
       Category.getCategories().then(function (categoriesData) {
-        self.categories = categoriesData.data;
-        console.log(self.categories);
+        self.categories = categoriesData[0];
+        console.log(categoriesData);
       });
     };
     self.getCategories();
@@ -75,7 +75,7 @@
     self.categories=[];
     self.getCategories = function(){
       Category.getCategories().then(function (categoriesData) {
-        self.categories = categoriesData.data;
+        self.categories = categoriesData[0];
         console.log(self.categories);
       });
     };

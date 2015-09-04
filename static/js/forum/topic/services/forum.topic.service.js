@@ -32,8 +32,7 @@
 				url: '/forum/topic/rest/',
 				method: 'GET'
 			};
-			// return HttpService.doRequest(settings);
-			return $http(settings);
+			return HttpService.doRequest(settings);
 		}
 
 		function getTopics(c_id) {
@@ -42,8 +41,7 @@
 				url: '/forum/category/rest/'+c_id+'/topics/',
 				method: 'GET'
 			};
-			// return HttpService.doRequest(settings);
-			return $http(settings);
+			return HttpService.doRequest(settings);
 		}
 
 		function getTopic(t_id) {
@@ -53,7 +51,7 @@
 				method: 'GET'
 			};
 			return HttpService.doRequest(settings);
-			// return $http(settings);
+
 		}
 
 		function addTopic(topic) {

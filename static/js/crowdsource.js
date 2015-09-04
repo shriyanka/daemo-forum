@@ -35,7 +35,7 @@ angular
     'crowdsource.drive',
     'crowdsource.data-table',
     'crowdsource.user',
-    'crowdsource.helpers'
+    'crowdsource.helpers',
     'crowdsource.forum.category',
     'crowdsource.forum.topic',
     'crowdsource.forum.comment'

@@ -20,16 +20,16 @@
 			$location.path('/login');
 			return;
 		}
-		
+
     var self = this;
 		self.topic={};
 		Topic.getTopic($routeParams.param).then(function(topicData){
-			self.topic=topicData.data;
+			self.topic=topicData[0];
 			console.log(self.topic);
 		});
 
 		Comment.getComments($routeParams.param).then(function (commentsData) {
-			self.comments = commentsData.data;
+			self.comments = commentsData[0];
 			console.log(self.comments);
 		});
 
@@ -43,7 +43,7 @@
 						.content('New comment added')
 						.hideDelay(3000)
 				);
-				self.comments.push(commentData.data);
+				self.comments.push(commentData[0]);
 				self.newcomment = {
 					topic: self.topic.id
 				};
