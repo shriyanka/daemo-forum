@@ -73,7 +73,6 @@ INSTALLED_APPS += (
     'oauth2_provider',
     'crowdsourcing',
     'autofixture',
-    'spirit',
 
 )
 
