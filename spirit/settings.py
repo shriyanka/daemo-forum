@@ -110,24 +110,24 @@ MIDDLEWARE_CLASSES = [
     'spirit.core.middleware.PrivateForumMiddleware',
 ]
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.contrib.auth.context_processors.auth',
-                'django.template.context_processors.debug',
-                'django.template.context_processors.i18n',
-                'django.template.context_processors.media',
-                'django.template.context_processors.static',
-                'django.template.context_processors.tz',
-                'django.template.context_processors.request',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
+# TEMPLATES = [
+#     {
+#         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+#         'APP_DIRS': True,
+#         'OPTIONS': {
+#             'context_processors': [
+#                 'django.contrib.auth.context_processors.auth',
+#                 'django.template.context_processors.debug',
+#                 'django.template.context_processors.i18n',
+#                 'django.template.context_processors.media',
+#                 'django.template.context_processors.static',
+#                 'django.template.context_processors.tz',
+#                 'django.template.context_processors.request',
+#                 'django.contrib.messages.context_processors.messages',
+#             ],
+#         },
+#     },
+# ]
 
 
 #
@@ -144,9 +144,9 @@ MIDDLEWARE_CLASSES += [
     'djconfig.middleware.DjConfigMiddleware',
 ]
 
-TEMPLATES[0]['OPTIONS']['context_processors'] += [
-    'djconfig.context_processors.config',
-]
+# TEMPLATES[0]['OPTIONS']['context_processors'] += [
+#     'djconfig.context_processors.config',
+# ]
 
 # django-haystack
 
