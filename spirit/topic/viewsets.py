@@ -6,7 +6,6 @@ from rest_framework.decorators import detail_route,list_route,permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
-import pdb
 class TopicViewSet(viewsets.ModelViewSet):
 	#TODO get queryset according to view in views.py
 	queryset = Topic.objects.all()

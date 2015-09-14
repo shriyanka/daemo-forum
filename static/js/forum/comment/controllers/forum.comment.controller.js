@@ -33,10 +33,9 @@
 			console.log(self.comments);
 		});
 
-		self.newcomment = {
-			topic: self.topic.id
-		};
+    self.newcomment = {};
 		self.addComment = function(){
+      self.newcomment.topic =  self.topic.id;
 			Comment.addComment(self.newcomment).then(function(commentData){
 				$mdToast.show(
 						$mdToast.simple()

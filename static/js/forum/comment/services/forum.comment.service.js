@@ -51,7 +51,7 @@
 				data: {
 					topic: comment.topic,
 					comment: comment.comment,
-					comment_html: comment.comment_html
+					comment_html: comment.comment
 				}
 			};
 			return HttpService.doRequest(settings);
