@@ -32,13 +32,11 @@
     self.getCategories = function(){
       Category.getCategories().then(function (categoriesData) {
         self.categories = categoriesData[0];
-        console.log(categoriesData);
       });
     };
     self.getCategories();
 
     self.add = function(ev) {
-      console.log("clcked on add");
       $mdDialog.show({
         controller: AddCategoryController,
         controllerAs: 'addcategory',
@@ -59,7 +57,6 @@
           }
         });
       }, function() {
-        console.log('You cancelled the dialog.');
       });
     };
 
@@ -76,7 +73,6 @@
     self.getCategories = function(){
       Category.getCategories().then(function (categoriesData) {
         self.categories = categoriesData[0];
-        console.log(self.categories);
       });
     };
     self.getCategories();
