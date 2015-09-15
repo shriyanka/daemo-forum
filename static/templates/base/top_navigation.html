@@ -15,6 +15,9 @@
         <md-button ng-class="[ {'md-active': isActiveTab('my-projects')}]" ng-if="account.is_requester" class="md-no-ink" ng-click="ctrl.navigateTo('my-projects')">
             My Projects
         </md-button>
+        <md-button ng-class="[ {'md-active': isActiveTab('forum-home')}]" class="md-no-ink" ng-click="ctrl.navigateTo('forum-home')">
+            Forum
+        </md-button>
         <md-button class="md-no-ink" ng-click="ctrl.logout()">
             Logout
         </md-button>
