@@ -33,12 +33,15 @@
     }
 
   	self.category = {};
+		self.category.topics=[];
 		Category.getCategory($routeParams.param).then(function (CategoryData){
 			self.category = CategoryData[0];
 		});
-		self.topics=[];
+    Category.getCategory(self.category.parent).then(function (CategoryData){
+      self.category.parentCategory = CategoryData[0];
+    });
     Topic.getTopics($routeParams.param).then(function (topicsData) {
-      self.topics = topicsData[0];
+      self.category.topics = topicsData[0];
     });
 
 		self.addTopic = function(ev) {
