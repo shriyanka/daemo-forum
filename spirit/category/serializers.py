@@ -4,7 +4,7 @@ class SubCategorySerializer(serializers.ModelSerializer):
 	topic_set = serializers.PrimaryKeyRelatedField(many = True, read_only = True)
 	class Meta:
 		model = Category
-		fields = ("parent", "title", "description", "is_closed", "is_removed","topic_set")
+		fields = ("id","parent", "title", "description", "is_closed", "is_removed","topic_set")
 class CategorySerializer(serializers.ModelSerializer):
 	category_set = SubCategorySerializer(many = True, read_only = True)
 	topic_set = serializers.PrimaryKeyRelatedField(many = True, read_only = True)
