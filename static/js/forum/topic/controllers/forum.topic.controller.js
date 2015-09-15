@@ -26,29 +26,22 @@
   */
   function TopicController($location, $scope, Authentication, Topic, Category, $routeParams, $mdDialog, $mdToast) {
     var self = this;
-		self.category = {};
+    var userAccount = Authentication.getAuthenticatedAccount();
+    if (!userAccount) {
+      $location.path('/login');
+      return;
+    }
+
+  	self.category = {};
 		Category.getCategory($routeParams.param).then(function (CategoryData){
 			self.category = CategoryData[0];
-			// console.log(self.category);
 		});
-		var userAccount = Authentication.getAuthenticatedAccount();
-		if (!userAccount) {
-			$location.path('/login');
-			return;
-		}
 		self.topics=[];
     Topic.getTopics($routeParams.param).then(function (topicsData) {
       self.topics = topicsData[0];
-      console.log(self.topics);
     });
 
-		// Topic.getAllTopics().then(function (topicsData) {
-    //   self.topics = topicsData[0];
-    //   console.log(self.topics);
-    // });
-
 		self.addTopic = function(ev) {
-			console.log("clcked on add");
 			$mdDialog.show({
 				controller: AddTopicController,
 				controllerAs: 'addtopic',
@@ -70,12 +63,10 @@
 					}
 				});
 			}, function() {
-				console.log('You cancelled the dialog.');
 			});
 		};
 
 		self.addSubCategory = function(ev) {
-			console.log("clcked on add");
 			$mdDialog.show({
 				controller: AddSubCategoryController,
 				controllerAs: 'addsubcategory',
@@ -97,7 +88,6 @@
 					}
 				});
 			}, function() {
-				console.log('You cancelled the dialog.');
 			});
 		};
 
