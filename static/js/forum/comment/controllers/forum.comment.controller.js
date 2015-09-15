@@ -25,12 +25,10 @@
 		self.topic={};
 		Topic.getTopic($routeParams.param).then(function(topicData){
 			self.topic=topicData[0];
-			console.log(self.topic);
 		});
 
 		Comment.getComments($routeParams.param).then(function (commentsData) {
 			self.comments = commentsData[0];
-			console.log(self.comments);
 		});
 
     self.newcomment = {};
