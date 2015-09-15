@@ -28,7 +28,7 @@
 		});
 
 		Comment.getComments($routeParams.param).then(function (commentsData) {
-			self.comments = commentsData[0];
+			self.topic.comments = commentsData[0];
 		});
 
     self.newcomment = {};
