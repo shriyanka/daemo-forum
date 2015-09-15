@@ -1,7 +1,7 @@
 <div flex="">
 	<md-card>
 		<md-card-content layout = "row">
-			<span><a href="">Daemo</a> <md-icon class="material-icons" layout-align="center center">navigate_next</md-icon>  <a href="">Forum</a> <md-icon class="material-icons" layout-align="center center">navigate_next</md-icon>  <a href="">Category 1</a></span>
+			<span><a href="/">Daemo</a> <md-icon class="material-icons" layout-align="center center">navigate_next</md-icon>  <a href="/forum-home/">Forum</a> <md-icon class="material-icons" layout-align="center center">navigate_next</md-icon>  <a href="/forum-category/{{topic.category.id}}/">{{topic.category.title}}</a></span>
 		</md-card-content>
 	</md-card>
 	<md-card ng-show="topic.category.parent == NULL">
@@ -23,7 +23,9 @@
 						<div class="md-list-item-text">
 							<div layout="row">
 								<div layout="column" flex="80" layout-align="center start">
+									<a ng-href="/forum-category/{{subcategory.id}}/">
 									<h3>{{subcategory.title}}</h3>
+									</a>
 									<p>{{subcategory.description}}</p>
 								</div>
 								<!-- <div layout = "row" flex="20" layout-align = "center end">
@@ -63,7 +65,9 @@
 					<div class="md-list-item-text">
 						<div layout="row">
 							<div layout="column" flex="80" layout-align="center start">
+								<a ng-href="/forum-topic/{{topic.id}}/">
 								<h3>{{topic.title}}</h3>
+								</a>
 								<p>{{topic.description}}</p>
 							</div>
 							<div layout = "row" flex="20" layout-align = "center end">
