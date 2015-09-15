@@ -9,12 +9,12 @@
     .module('crowdsource.forum.comment.controllers')
     .controller('CommentController', CommentController);
 
-  CommentController.$inject = ['$location', '$scope', 'Authentication', 'Comment', 'Topic', '$routeParams', '$mdToast'];
+  CommentController.$inject = ['$location', '$scope', 'Authentication', 'Comment', 'Topic', 'Category', '$routeParams', '$mdToast'];
 
   /**
   * @namespace CommentController
   */
-	function CommentController($location, $scope, Authentication, Comment, Topic, $routeParams, $mdToast) {
+	function CommentController($location, $scope, Authentication, Comment, Topic, Category, $routeParams, $mdToast) {
 		var userAccount = Authentication.getAuthenticatedAccount();
 		if (!userAccount) {
 			$location.path('/login');
@@ -30,6 +30,15 @@
 		Comment.getComments($routeParams.param).then(function (commentsData) {
 			self.topic.comments = commentsData[0];
 		});
+
+    Category.getCategory(self.topic.category).then(function (CategoryData){
+			self.topic.category = CategoryData[0];
+		});
+
+    Category.getCategory(self.topic.category.parent).then(function (CategoryData){
+      self.topic.category.parentCategory = CategoryData[0];
+    });
+
 
     self.newcomment = {};
 		self.addComment = function(){
