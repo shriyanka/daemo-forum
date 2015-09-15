@@ -1,9 +1,9 @@
 <div flex="">
 	<md-card>
 		<md-card-content layout = "row">
-			<span><a href="">Daemo</a>
-				<md-icon class="material-icons" layout-align="center center">navigate_next</md-icon>  <a href="">Forum</a>
-				<md-icon class="material-icons" layout-align="center center">navigate_next</md-icon>  <a href="">Category 1</a>
+			<span><a href="/">Daemo</a>
+				<md-icon class="material-icons" layout-align="center center">navigate_next</md-icon>  <a href="/forum-home/">Forum</a>
+				<md-icon class="material-icons" layout-align="center center">navigate_next</md-icon>  <a href="/forum-category/{{comment.topic.category}}">Category 1</a>
 				<md-icon class="material-icons" layout-align="center center">navigate_next</md-icon>  <a href="">Topic 1</a>
 			</span>
 		</md-card-content>
@@ -91,7 +91,7 @@
 					<div class="md-list-item-text">
 						<div layout="row">
 							<div layout="column" flex="80" layout-align="center start">
-								<h3>{{comment.user}}</h3>
+								<h3>{{comment.username}}</h3>
 								<p>{{comment.comment}}</p>
 							</div>
 
