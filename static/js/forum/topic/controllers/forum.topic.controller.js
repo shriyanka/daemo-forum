@@ -40,11 +40,13 @@
           self.category.parent = CategoryData[0];
         });
       }
+      Topic.getTopics($routeParams.param).then(function (topicsData) {
+        self.category.topics = topicsData[0];
+        console.log(self.category.topics);
+      });
 		});
 
-    Topic.getTopics($routeParams.param).then(function (topicsData) {
-      self.category.topics = topicsData[0];
-    });
+
 
 
 		self.addTopic = function(ev) {
@@ -65,7 +67,7 @@
 								.content('New Topic added : '+topicData[0].title)
 								.hideDelay(3000)
 						);
-						self.topics.push(topicData[0]);
+						self.category.topics.push(topicData[0]);
 					}
 				});
 			}, function() {

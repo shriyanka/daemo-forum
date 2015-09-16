@@ -32,13 +32,14 @@
             self.topic.category.parent = CategoryData[0];
           });
         }
+
       });
-
+      Comment.getComments($routeParams.param).then(function (commentsData) {
+  			self.topic.comments = commentsData[0];
+  		});
 		});
 
-		Comment.getComments($routeParams.param).then(function (commentsData) {
-			self.topic.comments = commentsData[0];
-		});
+
 
 
 
