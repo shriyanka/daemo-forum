@@ -1,7 +1,14 @@
 <div flex="">
 	<md-card>
-		<md-card-content layout = "row">
-			<span><a href="/">Daemo</a> <md-icon class="material-icons" layout-align="center center">navigate_next</md-icon>  <a href="/forum-home/">Forum</a> <md-icon class="material-icons" layout-align="center center">navigate_next</md-icon>  <a href="/forum-category/{{topic.category.id}}/">{{topic.category.title}}</a></span>
+		<md-card-content>
+			<div layout = "row">
+			<span><a href="/">Daemo</a> <md-icon class="material-icons" layout-align="center center">navigate_next</md-icon>
+			<a href="/forum-home/">Forum</a> <md-icon class="material-icons" layout-align="center center">navigate_next</md-icon>
+			<a ng-show="topic.category.parent" href="/forum-category/{{topic.category.parent.id}}/">{{topic.category.parent.title}}</a> <md-icon ng-show="topic.category.parent" class="material-icons" layout-align="center center">navigate_next</md-icon> </span>
+		</div>
+		<div>
+			<h2>{{topic.category.title}}</h2>
+		</div>
 		</md-card-content>
 	</md-card>
 	<md-card ng-show="topic.category.parent == NULL">

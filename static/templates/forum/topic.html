@@ -1,84 +1,88 @@
 <div flex="">
 	<md-card>
-		<md-card-content layout = "row">
-			<span><a href="/">Daemo</a>
-				<md-icon class="material-icons" layout-align="center center">navigate_next</md-icon>  <a href="/forum-home/">Forum</a>
-				<md-icon class="material-icons" layout-align="center center">navigate_next</md-icon>  <a href="/forum-category/{{comment.topic.category}}">Category 1</a>
-				<md-icon class="material-icons" layout-align="center center">navigate_next</md-icon>  <a href="">Topic 1</a>
-			</span>
-		</md-card-content>
-	</md-card>
-	<!-- <md-card>
-		<md-toolbar>
-			<div class="md-toolbar-tools">
-			<h3><span>Sub-Categories</span></h3>
-		</div>
-		</md-toolbar>
 		<md-card-content>
+			<div layout = "row">
+				<span><a href="/">Daemo</a> <md-icon class="material-icons" layout-align="center center">navigate_next</md-icon>
+					<a href="/forum-home/">Forum</a> <md-icon class="material-icons" layout-align="center center">navigate_next</md-icon>
+					<a ng-show="comment.topic.category.parent" href="/forum-category/{{comment.topic.category.parent.id}}/">{{comment.topic.category.parent.title}}</a> <md-icon ng-show="comment.topic.category.parent" class="material-icons" layout-align="center center">navigate_next</md-icon>
+					<a href="/forum-category/{{comment.topic.category.id}}/">{{comment.topic.category.title}}</a> <md-icon class="material-icons" layout-align="center center">navigate_next</md-icon> </span>
+				</div>
+				<div>
+					<h2>{{comment.topic.title}}</h2>
+				</div>
+			</md-card-content>
+		</md-card>
+		<!-- <md-card>
+		<md-toolbar>
+		<div class="md-toolbar-tools">
+		<h3><span>Sub-Categories</span></h3>
+	</div>
+</md-toolbar>
+<md-card-content>
 
-			<md-list>
-				<md-list-item class="md-2-line md-offset" >
-					<md-icon class="material-icons md-48" layout-align="center center">list</md-icon>
-					<div class="md-list-item-text">
-						<div layout="row">
-							<div layout="column" flex="80" layout-align="center start">
-								<h3>Sub Category 1</h3>
-								<p>Description of sb1 bla bla bla bla bla bla bla bla bla bla bla bla</p>
-							</div>
-							<div layout = "row" flex="20" layout-align = "center end">
-									<div  flex="50">
-										<md-icon md-font-set="material-icons">comment</md-icon> 67
-									</div>
-									<div  flex="50">
-										<md-icon md-font-set="material-icons">visibility</md-icon> 10
-									</div>
-							</div>
-						</div>
-					</div>
-				</md-list-item>
-				<md-divider></md-divider>
-				<md-list-item class="md-2-line md-offset" >
-					<md-icon class="material-icons md-48" layout-align="center center">list</md-icon>
-					<div class="md-list-item-text">
-						<div layout="row">
-							<div layout="column" flex="80" layout-align="center start">
-								<h3>Sub Category 2</h3>
-								<p>Description of sb2 bla bla bla............... . . . . . </p>
-							</div>
-							<div layout = "row" flex="20" layout-align = "center end">
-									<div  flex="50">
-										<md-icon md-font-set="material-icons">comment</md-icon> 67
-									</div>
-									<div  flex="50">
-										<md-icon md-font-set="material-icons">visibility</md-icon> 10
-									</div>
-							</div>
-						</div>
-					</div>
-				</md-list-item>
-				<md-divider></md-divider>
-				<md-list-item class="md-2-line md-offset" >
-					<md-icon class="material-icons md-48" layout-align="center center">list</md-icon>
-					<div class="md-list-item-text">
-						<div layout="row">
-							<div layout="column" flex="80" layout-align="center start">
-								<h3>Sub Category 3</h3>
-								<p>Description of sb3 bla bla bla</p>
-							</div>
-							<div layout = "row" flex="20" layout-align = "center end">
-									<div  flex="50">
-										<md-icon md-font-set="material-icons">comment</md-icon> 67
-									</div>
-									<div  flex="50">
-										<md-icon md-font-set="material-icons">visibility</md-icon> 10
-									</div>
-							</div>
-						</div>
-					</div>
-				</md-list-item>
-			</md-list>
-		</md-card-content>
-	</md-card> -->
+<md-list>
+<md-list-item class="md-2-line md-offset" >
+<md-icon class="material-icons md-48" layout-align="center center">list</md-icon>
+<div class="md-list-item-text">
+<div layout="row">
+<div layout="column" flex="80" layout-align="center start">
+<h3>Sub Category 1</h3>
+<p>Description of sb1 bla bla bla bla bla bla bla bla bla bla bla bla</p>
+</div>
+<div layout = "row" flex="20" layout-align = "center end">
+<div  flex="50">
+<md-icon md-font-set="material-icons">comment</md-icon> 67
+</div>
+<div  flex="50">
+<md-icon md-font-set="material-icons">visibility</md-icon> 10
+</div>
+</div>
+</div>
+</div>
+</md-list-item>
+<md-divider></md-divider>
+<md-list-item class="md-2-line md-offset" >
+<md-icon class="material-icons md-48" layout-align="center center">list</md-icon>
+<div class="md-list-item-text">
+<div layout="row">
+<div layout="column" flex="80" layout-align="center start">
+<h3>Sub Category 2</h3>
+<p>Description of sb2 bla bla bla............... . . . . . </p>
+</div>
+<div layout = "row" flex="20" layout-align = "center end">
+<div  flex="50">
+<md-icon md-font-set="material-icons">comment</md-icon> 67
+</div>
+<div  flex="50">
+<md-icon md-font-set="material-icons">visibility</md-icon> 10
+</div>
+</div>
+</div>
+</div>
+</md-list-item>
+<md-divider></md-divider>
+<md-list-item class="md-2-line md-offset" >
+<md-icon class="material-icons md-48" layout-align="center center">list</md-icon>
+<div class="md-list-item-text">
+<div layout="row">
+<div layout="column" flex="80" layout-align="center start">
+<h3>Sub Category 3</h3>
+<p>Description of sb3 bla bla bla</p>
+</div>
+<div layout = "row" flex="20" layout-align = "center end">
+<div  flex="50">
+<md-icon md-font-set="material-icons">comment</md-icon> 67
+</div>
+<div  flex="50">
+<md-icon md-font-set="material-icons">visibility</md-icon> 10
+</div>
+</div>
+</div>
+</div>
+</md-list-item>
+</md-list>
+</md-card-content>
+</md-card> -->
 <div ng-repeat = "comment in comment.topic.comments">
 
 	<md-card>
@@ -102,19 +106,19 @@
 		</md-card-content>
 	</md-card>
 </div>
-	<md-card>
-		<md-card-content>
-			<form>
-				<md-input-container flex>
-					<label>Add Your comment here</label>
-						<textarea ng-model="comment.newcomment.comment"></textarea>
-				</md-input-container>
-				<md-button ng-click="comment.addComment()" style="margin-right:20px;">
-					Add
-				</md-button>
-			</form>
-		</md-card-content>
-	</md-card>
+<md-card>
+	<md-card-content>
+		<form>
+			<md-input-container flex>
+				<label>Add Your comment here</label>
+				<textarea ng-model="comment.newcomment.comment"></textarea>
+			</md-input-container>
+			<md-button ng-click="comment.addComment()" style="margin-right:20px;">
+				Add
+			</md-button>
+		</form>
+	</md-card-content>
+</md-card>
 
 
 
