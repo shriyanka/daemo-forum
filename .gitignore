@@ -2,6 +2,12 @@
 spirit/search/whoosh_index/
 example/media/
 venv
+*.pyc
+local_settings.py
+
+# Created by https://www.gitignore.io
+
+### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -12,11 +18,11 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
-bin/
 build/
 develop-eggs/
-dist/
+downloads/
 eggs/
+.eggs/
 lib/
 lib64/
 parts/
@@ -25,6 +31,12 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+static/bower_components/
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
 
 # Installer logs
 pip-log.txt
@@ -34,33 +46,69 @@ pip-delete-this-directory.txt
 htmlcov/
 .tox/
 .coverage
+.coverage.*
 .cache
 nosetests.xml
 coverage.xml
+*,cover
 
-# Mr Developer / eclipse pydev
-.mr.developer.cfg
-.project
-.pydevproject
-.settings
-
-# Rope
-.ropeproject
+# Translations
+*.mo
+*.pot
 
 # Django stuff:
 *.log
-*.pot
 
 # Sphinx documentation
 docs/_build/
 
-# Pycharm
-.idea
+# PyBuilder
+target/
 
-# Vim
+
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+
+
+### VirtualEnv ###
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ss]cripts
+pyvenv.cfg
+pip-selfcheck.json
+
+
+### SublimeText ###
+# cache files for sublime text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+# workspace files are user-specific
+*.sublime-workspace
+
+# project files should be checked into the repository, unless a significant
+# proportion of contributors will probably not be using SublimeText
+# *.sublime-project
+
+# sftp configuration file
+sftp-config.json
+
+db.sqlite3
+# PyCharm
+.idea/
+
 *~
-*.swp
-*.swo
-
-# Tx
-.transifexrc
+.DS_Store
+.classpath
+.project
+.settings/
+.sass-cache

@@ -2,13 +2,18 @@
 
 from __future__ import unicode_literals
 
-from django.conf.urls import url, include
+from django.conf.urls import url,include
+from rest_framework.routers import SimpleRouter
+from viewsets import CommentViewSet
 
 import spirit.comment.bookmark.urls
 import spirit.comment.flag.urls
 import spirit.comment.history.urls
 import spirit.comment.like.urls
 from . import views
+
+router = SimpleRouter(trailing_slash = True)
+router.register(r'rest',CommentViewSet)
 
 
 urlpatterns = [
@@ -28,4 +33,5 @@ urlpatterns = [
     url(r'^flag/', include(spirit.comment.flag.urls, namespace='flag')),
     url(r'^history/', include(spirit.comment.history.urls, namespace='history')),
     url(r'^like/', include(spirit.comment.like.urls, namespace='like')),
+    url(r'',include(router.urls)),
 ]

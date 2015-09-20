@@ -2,7 +2,9 @@
 
 from __future__ import unicode_literals
 
-from django.conf.urls import url, include
+from django.conf.urls import url,include
+from rest_framework.routers import SimpleRouter
+from viewsets import TopicViewSet
 
 import spirit.topic.moderate.urls
 import spirit.topic.unread.urls
@@ -12,6 +14,8 @@ import spirit.topic.private.urls
 import spirit.topic.poll.urls
 from . import views
 
+router = SimpleRouter(trailing_slash = True)
+router.register(r'rest',TopicViewSet)
 
 urlpatterns = [
     url(r'^publish/$', views.publish, name='publish'),
@@ -30,4 +34,5 @@ urlpatterns = [
     url(r'^favorite/', include(spirit.topic.favorite.urls, namespace='favorite')),
     url(r'^private/', include(spirit.topic.private.urls, namespace='private')),
     url(r'^poll/', include(spirit.topic.poll.urls, namespace='poll')),
+    url(r'',include(router.urls)),
 ]

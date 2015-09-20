@@ -6,14 +6,14 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
 
 from ..core.utils.timezone import TIMEZONE_CHOICES
 from ..core.utils.models import AutoSlugField
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name=_("profile"), related_name='st')
+    user = models.OneToOneField(User, verbose_name=_("profile"), related_name='st')
 
     slug = AutoSlugField(populate_from="user.username", db_index=False, blank=True)
     location = models.CharField(_("location"), max_length=75, blank=True)
@@ -47,12 +47,12 @@ class UserProfile(models.Model):
         return reverse('spirit:user:detail', kwargs={'pk': self.user.pk, 'slug': self.slug})
 
 
-class User(AbstractUser):
-    # Backward compatibility
-
-    class Meta(AbstractUser.Meta):
-        swappable = 'AUTH_USER_MODEL'
-        ordering = ['-date_joined', '-pk']
-        verbose_name = _('user')
-        verbose_name_plural = _('users')
-        db_table = 'spirit_user_user'
+# class User(AbstractUser):
+#     # Backward compatibility
+#
+#     class Meta(AbstractUser.Meta):
+#         swappable = 'AUTH_USER_MODEL'
+#         ordering = ['-date_joined', '-pk']
+#         verbose_name = _('user')
+#         verbose_name_plural = _('users')
+#         db_table = 'spirit_user_user'
