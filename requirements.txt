@@ -16,7 +16,7 @@ django-oauth-toolkit
 google-api-python-client
 dropbox
 pandas==0.16.2
-numpy==1.9.2
+numpy==1.22.0
 sendgrid
 djrill==1.4.0
 gunicorn==19.3.0
